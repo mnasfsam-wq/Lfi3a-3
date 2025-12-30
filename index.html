@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lfi3a Language | اللفيعة - مسلم مناصف</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="user-view" class="container">
+    <header>
+        <h1>🐍 لغة اللفيعة (Lfi3a)</h1>
+        <p>بإشراف المبتكر: <span class="creator">مسلم مناصف</span></p>
+    </header>
+
+    <div class="editor-section">
+        <textarea id="editor" placeholder="كتب كود اللفيعة هنا...">dir smiya = "مسلم";
+kteb("السلام عليكم يا " + smiya);
+3awd (3) {
+    kteb("اللفيعة خدامة!");
+} sed</textarea>
+        <div class="btns">
+            <button class="btn-run" onclick="runLfi3a()">طليق الكود (Run)</button>
+            <button class="btn-clear" onclick="clearEditor()">مسح</button>
+        </div>
+        <div id="output">النتيجة غتخرج هنا...</div>
+    </div>
+</div>
+
+<div id="admin-panel" style="display:none;">
+    <div class="container">
+        <h2>🔒 لوحة تحكم مسلم مناصف</h2>
+        <div class="admin-grid" id="admin-features">
+            </div>
+        <button onclick="closeAdmin()">خروج من اللوحة</button>
+    </div>
+</div>
+
+<div class="secret-gate" onclick="loginAdmin()">🔒</div>
+
+<script src="script.js"></script>
+</body>
+</html>

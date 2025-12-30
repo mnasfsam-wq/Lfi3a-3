@@ -1,17 +1,38 @@
-// ميزات الآدمن (50 ميزة مبرمجة للعرض والتفاعل)
-const features = [
-    "تحديث المترجم", "تغيير الألوان", "وضع الصيانة", "إحصائيات الزوار", "حظر IP",
-    "تعديل الأوامر", "سجل العمليات", "قاعدة البيانات", "تشفير الكود", "نسخة احتياطية",
-    "تحليل الأداء", "إدارة الملفات", "فلترة النصوص", "تنبيهات الآدمن", "تعديل SEO",
-    "إضافة مكتبة", "تحسين السرعة", "فحص الثغرات", "تعديل الخط", "وضع الظلام",
-    "خرائط الموقع", "إدارة الروابط", "نظام النقاط", "توليد شهادات", "أرشفة يدوية",
-    "دعم فني", "حماية DDoS", "تحديث الكرنل", "إدارة الصور", "تعديل API",
-    "تحليل السلوك", "ضغط الملفات", "إحصائيات النشر", "وضع الهاكر", "تعديل CSS",
-    "إضافة بوت", "فحص الأخطاء", "إدارة البريد", "تتبع الوقت", "تحديث UI",
-    "تعديل العنوان", "تحميل التقارير", "إعدادات الخصوصية", "تغيير الساروت", "إدارة الـ Cache",
-    "توليد QR", "مترجم AI", "تصدير JSON", "تنظيف الداتابيز", "زر التدمير"
-];
+// ميزات الآدمن والوظائف المرتبطة بها
+const adminActions = {
+    "تغيير لون الموقع": () => {
+        let color = prompt("دخل كود اللون (مثلا red أو #ff0000):", "#22c55e");
+        if(color) document.documentElement.style.setProperty('--primary', color);
+    },
+    "مسح كود المحرر": () => {
+        document.getElementById('editor').value = "";
+        alert("تم تنظيف المحرر عن بُعد");
+    },
+    "إحصائيات الكود": () => {
+        let code = document.getElementById('editor').value;
+        let lines = code.split('\n').length;
+        let chars = code.length;
+        alert(`إحصائيات اللفيعة:\n- عدد الأسطر: ${lines}\n- عدد الحروف: ${chars}`);
+    },
+    "وضع الصيانة": () => {
+        if(confirm("واش بغيتي تسد الموقع للصيانة؟")) {
+            document.body.innerHTML = "<h1 style='color:white; text-align:center; margin-top:100px;'>الموقع في صيانة حالياً بطلب من مسلم مناصف.</h1>";
+        }
+    },
+    "عرض الأوامر (JSON)": () => {
+        alert("الأوامر الحالية: kteb, dir, ila, 3awd, sed");
+    },
+    "تحميل الكود الحالي": () => {
+        let text = document.getElementById('editor').value;
+        let blob = new Blob([text], {type: "text/plain"});
+        let anchor = document.createElement("a");
+        anchor.download = "lfi3a_code.txt";
+        anchor.href = window.URL.createObjectURL(blob);
+        anchor.click();
+    }
+};
 
+// تشغيل المحرر
 function runLfi3a() {
     let code = document.getElementById('editor').value;
     const out = document.getElementById('output');
@@ -27,13 +48,29 @@ function runLfi3a() {
     } catch (e) { out.innerText = "Error: " + e.message; }
 }
 
+// الدخول للوحة التحكم
 function loginAdmin() {
     if(prompt("دخل ساروت مسلم مناصف:") === "lfi3a2025") {
         document.getElementById('user-view').style.display = 'none';
         document.getElementById('admin-panel').style.display = 'block';
-        const grid = document.getElementById('admin-features');
-        grid.innerHTML = features.map((f, i) => `<div class="admin-card">${i+1}. ${f}</div>`).join('');
+        loadRealFeatures();
     }
+}
+
+// تحميل الميزات الحقيقية في اللوحة
+function loadRealFeatures() {
+    const grid = document.getElementById('admin-features');
+    grid.innerHTML = ""; // مسح القديم
+    
+    // تحويل الأوبجكت إلى أزرار حقيقية
+    Object.keys(adminActions).forEach((key) => {
+        let card = document.createElement('div');
+        card.className = "admin-card";
+        card.style.cursor = "pointer";
+        card.innerHTML = `<h3>⚙️</h3><p>${key}</p>`;
+        card.onclick = adminActions[key]; // ربط الضغطة بالوظيفة
+        grid.appendChild(card);
+    });
 }
 
 function closeAdmin() {
